@@ -29,7 +29,7 @@ Train_Drone_Detector_Yymidpoint-SVR.py
 it takes less than 30 minutesrs and creates the svr_lin_Drone_Detector_Yymidpoint.pickle model with a size of about 2 Gb
 
 3-
-From the test images ( is used the valid folder)  and labels  and based on the svr_lin_Drone_Detector_Yxmidpoint.pickle  model obtained in step 1- , create a .txt file with the predicted Xcenter coordinates for each dron of the test images (Predicted_True_Xcenter_Drone_Detector.txt file)
+From the test images ( is used the valid folder as test)  and labels  and based on the svr_lin_Drone_Detector_Yxmidpoint.pickle  model obtained in step 1- , create a .txt file with the predicted Xcenter coordinates for each dron of the test images (Predicted_True_Xcenter_Drone_Detector.txt file)
 
 by running:
 
@@ -37,7 +37,7 @@ Create_File_Drone_Detector_With_Predicted_Xcenter_SVR.py
 
 4-
 
-From the test images ( is used the valid folder)  and labels  and based on the svr_lin_Drone_Detector_Yymidpoint.pickle  model obtained in step 2- , create a .txt file with the predicted Ycenter coordinates for each dron of the test images (Predicted_True_Ycenter_Drone_Detector.txt file)
+From the test images ( is used the valid folder as test)  and labels  and based on the svr_lin_Drone_Detector_Yymidpoint.pickle  model obtained in step 2- , create a .txt file with the predicted Ycenter coordinates for each dron of the test images (Predicted_True_Ycenter_Drone_Detector.txt file)
 
 by running:
 
