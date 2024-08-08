@@ -44,16 +44,28 @@ by running:
 Create_File_Drone_Detector_With_Predicted_Ycenter_SVR.py
 
 
-5- Execute an  Evaluation by running:
+5- Execute an  Evaluation by running with the images from the valid folder:
 
 Evaluate_Resized_bone-fracture-2_Xcenter_Ycenter_SVR.py
 
 The test images appear on the screen with a blue circle indicating the predicted dron and a green rectangle indicating where the dron  was indicated when the image was labeled.
 
+6-
+Test any set of images
+
+Test_Drone_Detector_Xcenter_Ycenter_SVR.py
+
+Which takes as test the first 40 images downloaded from https://www.kaggle.com/datasets/sshikamaru/drone-yolo-detection in the attached Test1.zip file (it comes as a zip and you have to unzip it and be careful if a nested Test1 folder is generated that would prevent the program from accessing the images)
+
+This way, a test is done with images independent of those used in training and not labeled, as would be a real test.
+
+The results indicate that this project needs to be improved
 
 References:
 
 https://universe.roboflow.com/drone-detection-pexej/drone-detection-data-set-yolov7/dataset/1#
+
+https://www.kaggle.com/datasets/sshikamaru/drone-yolo-detection
 
 https://medium.com/@niousha.rf/support-vector-regressor-theory-and-coding-exercise-in-python-ca6a7dfda927
 
