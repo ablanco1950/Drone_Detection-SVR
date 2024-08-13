@@ -72,3 +72,5 @@ https://medium.com/@niousha.rf/support-vector-regressor-theory-and-coding-exerci
 https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html
 
 https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+
+https://github.com/ablanco1950/Fracture.v1i_Reduced_SVR
