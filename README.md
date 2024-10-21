@@ -46,7 +46,7 @@ Create_File_Drone_Detector_With_Predicted_Ycenter_SVR.py
 
 5- Execute an  Evaluation by running with the images from the valid folder:
 
-Evaluate_Resized_bone-fracture-2_Xcenter_Ycenter_SVR.py
+Evaluate_Drone_Detector_Xcenter_Ycenter_SVR.py
 
 The test images appear on the screen with a blue circle indicating the predicted dron and a green rectangle indicating where the dron  was indicated when the image was labeled.
 
