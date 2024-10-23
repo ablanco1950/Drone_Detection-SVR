@@ -16,7 +16,7 @@ import pickle #to save, load  the model
 dirname="Drone-Detection-data-set(yolov7)-1\\valid\\images"
 dirnameLabels="Drone-Detection-data-set(yolov7)-1\\valid\\labels"
 
-imageSize=64
+
 
 ########################################################################
 def loadimages(dirname):
@@ -76,19 +76,12 @@ def loadimages(dirname):
                       Yxmidpoint.append(str(float(xywh[0])))
                       Yymidpoint.append(str(float(xywh[1])))
                       Ywmidpoint.append(str(float(xywh[2])))
-                      Yhmidpoint.append(str(float(xywh[3])))                  
-                      
-                 if SwEmpty==0 :
-                      continue
-
+                      Yhmidpoint.append(str(float(xywh[3])))
+                      break # only one drone per image is considered 
                  
-
-                 result= cv2.resize(image, (imageSize,imageSize), interpolation = cv2.INTER_AREA)
-                 
-                 #image = cv2.resize(image, (imageSize,imageSize), interpolation = cv2.INTER_AREA)
                  TabImagesCV.append(image)
                  # TO REDUCE MEMORY PROBLEMS, CONVERT TO GRAY
-                 cv2.imwrite("pptest.jpg", result)
+                 cv2.imwrite("pptest.jpg", image)
 
                  result= cv2.imread("pptest.jpg", cv2.IMREAD_GRAYSCALE)
                  
@@ -113,8 +106,6 @@ def plot_image(image, box, boxTrue, NameImage):
     # Display the image
     ax.imshow(im)
 
-    # box[0] is x midpoint, box[2] is width
-    # box[1] is y midpoint, box[3] is height
 
     # Create a Rectangle patch
     Cont=0
@@ -146,30 +137,6 @@ imagesCV, X_test, TabFileName, Yxmidpoint, Yymidpoint, Ywmidpoint, Yhmidpoint=lo
 print("Number of images to test : " + str(len(X_test)))
 
 
-
-"""
-
-
-# https://medium.com/@niousha.rf/support-vector-regressor-theory-and-coding-exercise-in-python-ca6a7dfda927
-
-
-from sklearn.preprocessing import StandardScaler
-
-### When using StandardScaler(), fit() method expects a 2D array-like input
-scaler = StandardScaler().fit(X_test)
-X_test_scaled = scaler.transform(X_test)
-
-model_svr_lin_Yxmidpoint= pickle.load( open("svr_lin_Yxmidpoint.pickle", 'rb'))
-model_svr_lin_Yymidpoint= pickle.load( open("svr_lin_Yymidpoint.pickle", 'rb'))
-#model_svr_lin_Ywmidpoint= pickle.load( open("svr_lin_Ywmidpoint.pickle", 'rb'))
-#model_svr_lin_Yhmidpoint= pickle.load( open("svr_lin_Yhmidpoint.pickle", 'rb'))
-
-import numpy as np
-from sklearn import metrics
-
-#### Test dataset - metrics ####
-y_test_pred_Yxmidpoint = model_svr_lin_Yxmidpoint.predict(X_test_scaled)
-"""
 y_test_pred_Yxmidpoint=[]
 f=open("Predicted_True_Xcenter_Drone_Detector.txt","r")
 
@@ -183,7 +150,6 @@ y_test_pred_Yymidpoint=[]
 f=open("Predicted_True_Ycenter_Drone_Detector.txt","r")
 
 for linea in f:                   
-                        
   
   ycentered=linea.split(",")
   y_test_pred_Yymidpoint.append(float(ycentered[0]))
@@ -205,50 +171,28 @@ print("true values for Ycenter:")
 print(Yymidpoint)
 
 print("===")
-"""
-y_test_pred_Ywmidpoint = model_svr_lin_Ywmidpoint.predict(X_test_scaled)
 
-print(y_test_pred_Ywmidpoint)
-print("REAL")
-print(Ywmidpoint)
-
-print("===")
-
-y_test_pred_Yhmidpoint = model_svr_lin_Yhmidpoint.predict(X_test_scaled)
-
-print(y_test_pred_Yhmidpoint)
-print("REAL")
-print(Yhmidpoint)
-"""
 print("==============================================================================")
 for i in range (len(imagesCV)):
     img=imagesCV[i]
-    print(TabFileName[i])
+   
     height, width, _ = img.shape
-    #print(y_test_pred_Yxmidpoint[i])
-    #print(width)
+   
     p1=float(y_test_pred_Yxmidpoint[i])* float(width)
     p1=int(p1)
-    #print(p1)
-    #print(int(p1))
+    
     p2=float(y_test_pred_Yymidpoint[i])* float(height)
     p2=int(p2)
-    #print(p2)
-    #print(int(p2))
-    #print(y_test_pred_Yymidpoint[i])
-    #print(height)
-    #cv2.circle(img,int(p1),int(p2), 10, (0,255,0), thickness=5)
+   
     cv2.circle(img,(p1,p2), 40, (0,0,255), thickness=5)
-    #cv2.imshow("ROI", img)  
-    #cv2.waitKey(0)
-    
+        
     boxes=[]
     boxesTrue=[]
     boxesTrue.append(Yxmidpoint[i])
     boxesTrue.append(Yymidpoint[i])
     boxesTrue.append(Ywmidpoint[i])
     boxesTrue.append(Yhmidpoint[i])
-    #plot_image(imagesCV[i], boxes, boxesTrue)
+   
     plot_image(img, boxes, boxesTrue, TabFileName[i])
     
 
